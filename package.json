@@ -1,0 +1,27 @@
+{
+  "name": "deckbox-enhancements",
+  "version": "0.1.0",
+  "description": "Various enhancements to Deckbox (deckbox.org)",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -p [browserify-userscript-header --file src/head.js] -t browserify-css src/main.js -o dist/deckbox-enhancements.user.js",
+    "watch": "watchify -p [browserify-userscript-header --file src/head.js] -t browserify-css src/main.js -o dist/deckbox-enhancements.user.js -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stuson/deckbox-enhancements.git"
+  },
+  "author": "Sam Tuson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stuson/deckbox-enhancements/issues"
+  },
+  "homepage": "https://github.com/stuson/deckbox-enhancements#readme",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "browserify-css": "^0.15.0",
+    "browserify-userscript-header": "^0.1.1",
+    "watchify": "^4.0.0"
+  }
+}

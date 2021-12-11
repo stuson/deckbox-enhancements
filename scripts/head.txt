@@ -1,9 +1,0 @@
-// ==UserScript==
-// @name         Deckbox Image Enlarger
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  Expand images without hovering when adding cards to your Deckbox inventory.
-// @author       Sam Tuson
-// @match        https://deckbox.org/sets/3006036*
-// @icon         https://www.google.com/s2/favicons?domain=deckbox.org
-// ==/UserScript==

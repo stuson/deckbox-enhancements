@@ -1,9 +1,4 @@
-const addStyles = () => {
-    const style = document.createElement("style");
-    style.innerHTML = css;
-
-    document.head.appendChild(style);
-};
+require("./style.css");
 
 const injectAutocompleteFinished = () => {
     Tcg.ui.ImportAddCardAdvanced.prototype._afterUpdate = inject(
@@ -65,6 +60,5 @@ const setFoil = (button, isFoil = false) => {
     isFoil ? button.classList.add("foil") : button.classList.remove("foil");
 };
 
-addStyles();
 injectAutocompleteFinished();
 injectRowAdded();

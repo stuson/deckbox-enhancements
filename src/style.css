@@ -1,3 +1,14 @@
+.details_row img.sprite.s_picture {
+    max-width: 106px;
+    min-height: 148px;
+    margin: 10px;
+}
+
+.esym {
+    position: relative;
+    z-index: 3;
+}
+
 .foil {
     position: relative;
 }
