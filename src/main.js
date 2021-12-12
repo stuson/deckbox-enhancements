@@ -1,7 +1,5 @@
 require("./style.css");
 
-console.log("Deckbox enchancements!");
-
 const injectAutocompleteFinished = () => {
     Tcg.ui.ImportAddCardAdvanced.prototype._afterUpdate = inject(
         Tcg.ui.ImportAddCardAdvanced.prototype._afterUpdate,
