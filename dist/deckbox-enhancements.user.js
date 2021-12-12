@@ -87,16 +87,6 @@ module.exports = {
 },{}],2:[function(require,module,exports){
 require("./style.css");
 
-const injectAutocompleteFinished = () => {
-    Tcg.ui.ImportAddCardAdvanced.prototype._afterUpdate = inject(
-        Tcg.ui.ImportAddCardAdvanced.prototype._afterUpdate,
-        {
-            before: preloadImg,
-            after: updateAllFormRows,
-        }
-    );
-};
-
 const injectRowAdded = () => {
     PanelCardInfo.prototype.addRow = inject(PanelCardInfo.prototype.addRow, {
         callback: (rowIndex) => {
@@ -120,17 +110,6 @@ const updateFoilStatus = (button, formIndex) => {
     setFoil(button.parent, isFoil);
 };
 
-const updateAllFormRows = () => {
-    const matches = new Set();
-    for (const index of Form.serialize("panel_card_info").matchAll(/.*?(FRM.*?)%5D/g, "$1")) {
-        matches.add(index[1]);
-    }
-
-    for (const match of matches) {
-        updateFormRow(match);
-    }
-};
-
 const updateFormRow = (rowIndex) => {
     const button = getButtonFromRowIndex(rowIndex);
     const img = getImgFromButton(button);
@@ -146,7 +125,6 @@ const updateDropdown = (rowIndex) => {
         );
 
         const url = valueSet[0].match(/src='(.*?)'/)[1];
-        preloadImg(url);
         return valueSet;
     };
 
@@ -182,11 +160,6 @@ const getImgFromButton = (button) => {
     return button.parent.getElementsByTagName("img")[0];
 };
 
-const getImgFromRowIndex = (rowIndex) => {
-    const button = getButtonFromRowIndex(rowIndex);
-    return getImgFromButton(button);
-};
-
 const replacePictureSprite = (img) => {
     img.src = `https://s.deckbox.org/system/images/mtg/cards/${img.dataset.tt}.jpg`;
 };
@@ -197,8 +170,7 @@ const setFoil = (buttonContainer, isFoil = false) => {
 
 injectSelectData();
 injectRowAdded();
-// injectAutocompleteFinished();
 
 },{"./style.css":3}],3:[function(require,module,exports){
-var css = ".details_row img.sprite.s_picture,\n._menu_item img.sprite.s_picture {\n  width: 106px;\n  height: 148px;\n  margin: 10px;\n  background-image: none;\n}\n.esym {\n  position: relative;\n  z-index: 3;\n}\n.foil {\n  position: relative;\n}\n.foil::before,\n.foil::after {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  top: 0;\n  background-repeat: no-repeat;\n  background-position: 50% 50%;\n}\n.foil::before {\n  background-size: 250% 250%;\n  background-image: linear-gradient(\r\n        115deg,\r\n        transparent 20%,\r\n        #ec9bb6 36%,\r\n        #ccac6f 43%,\r\n        #69e4a5 50%,\r\n        #8ec5d6 57%,\r\n        #b98cce 64%,\r\n        transparent 80%\r\n    );\n  opacity: 0.8;\n  mix-blend-mode: color-dodge;\n  z-index: 1;\n  filter: brightness(0.6) contrast(1.3);\n  animation: foilTurn 55s ease-in-out infinite;\n}\n.foil::after {\n  background-image: url(https://assets.codepen.io/13471/sparkles.gif),\r\n        url(https://assets.codepen.io/13471/holo.png),\r\n        linear-gradient(\r\n            125deg,\r\n            #ff008460 15%,\r\n            #fca40050 30%,\r\n            #ffff0040 40%,\r\n            #00ff8a30 60%,\r\n            #00cfff50 70%,\r\n            #cc4cfa60 85%\r\n        );\n  background-size: 160%;\n  z-index: 2;\n  mix-blend-mode: color-dodge;\n  background-blend-mode: overlay;\n  opacity: 0.15;\n  animation: foilScroll 55s infinite;\n}\n@keyframes foilTurn {\n  0%, 10%, 90%, 100% {\n    background-position: 50% 50%;\n  }\n\n  30%, 40% {\n    background-position: 0% 0%;\n  }\n\n  60%, 70% {\n    background-position: 100% 100%;\n  }\n}\n@keyframes foilScroll {\n  0%, 10%, 90%, 100% {\n    opacity: 0.15;\n  }\n\n  30%, 40% {\n    opacity: 0.4;\n  }\n\n  60%, 70% {\n    opacity: 0.4;\n  }\n}\n"; (require("browserify-css").createStyle(css, { "href": "src\\style.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = ".details_row img.sprite.s_picture,\n._menu_item img.sprite.s_picture {\n  width: 106px;\n  height: 148px;\n  margin: 10px;\n  background-image: none;\n}\n.esym {\n  position: relative;\n  z-index: 3;\n}\n.foil {\n  position: relative;\n}\n.foil::before,\n.foil::after {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  top: 0;\n  background-repeat: no-repeat;\n  background-position: 50% 50%;\n}\n.foil::before {\n  background-size: 250% 250%;\n  background-image: linear-gradient(\n        115deg,\n        transparent 20%,\n        #ec9bb6 36%,\n        #ccac6f 43%,\n        #69e4a5 50%,\n        #8ec5d6 57%,\n        #b98cce 64%,\n        transparent 80%\n    );\n  opacity: 0.8;\n  mix-blend-mode: color-dodge;\n  z-index: 1;\n  filter: brightness(0.6) contrast(1.3);\n  animation: foilTurn 55s ease-in-out infinite;\n}\n.foil::after {\n  background-image: url(https://assets.codepen.io/13471/sparkles.gif),\n        url(https://assets.codepen.io/13471/holo.png),\n        linear-gradient(\n            125deg,\n            #ff008460 15%,\n            #fca40050 30%,\n            #ffff0040 40%,\n            #00ff8a30 60%,\n            #00cfff50 70%,\n            #cc4cfa60 85%\n        );\n  background-size: 160%;\n  z-index: 2;\n  mix-blend-mode: color-dodge;\n  background-blend-mode: overlay;\n  opacity: 0.15;\n  animation: foilScroll 55s infinite;\n}\n@keyframes foilTurn {\n  0%, 10%, 90%, 100% {\n    background-position: 50% 50%;\n  }\n\n  30%, 40% {\n    background-position: 0% 0%;\n  }\n\n  60%, 70% {\n    background-position: 100% 100%;\n  }\n}\n@keyframes foilScroll {\n  0%, 10%, 90%, 100% {\n    opacity: 0.15;\n  }\n\n  30%, 40% {\n    opacity: 0.4;\n  }\n\n  60%, 70% {\n    opacity: 0.4;\n  }\n}\n"; (require("browserify-css").createStyle(css, { "href": "src/style.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":1}]},{},[2]);
