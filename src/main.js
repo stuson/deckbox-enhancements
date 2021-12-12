@@ -1,20 +1,18 @@
 require("./style.css");
 
-console.log("updated!");
-
-const injectAutocompleteFinished = () => {
-    Tcg.ui.ImportAddCardAdvanced.prototype._afterUpdate = inject(
-        Tcg.ui.ImportAddCardAdvanced.prototype._afterUpdate,
-        {
-            after: updateAllFormRows,
-        }
-    );
-};
-
 const injectRowAdded = () => {
     PanelCardInfo.prototype.addRow = inject(PanelCardInfo.prototype.addRow, {
-        callback: (addedFormIndex) => {
-            setTimeout(() => replacePictureSprite(addedFormIndex), 10);
+        callback: (rowIndex) => {
+            setTimeout(() => updateFormRow(rowIndex), 10);
+        },
+    });
+};
+
+const injectSelectData = () => {
+    PanelCardInfo.prototype.selectData = inject(PanelCardInfo.prototype.selectData, {
+        after: (rowIndex) => {
+            updateFormRow(rowIndex);
+            updateDropdown(rowIndex);
         },
     });
 };
@@ -22,21 +20,30 @@ const injectRowAdded = () => {
 const updateFoilStatus = (button, formIndex) => {
     const flags = Dropdown.all[`details[${formIndex}][flags]`].selectedValues.values();
     const isFoil = flags.includes("is_foil");
-    setFoil(button, isFoil);
+    setFoil(button.parent, isFoil);
 };
 
-const updateAllFormRows = () => {
-    const matches = new Set();
-    for (const index of Form.serialize("panel_card_info").matchAll(/.*?(FRM.*?)%5D/g, "$1")) {
-        matches.add(index[1]);
-    }
+const updateFormRow = (rowIndex) => {
+    const button = getButtonFromRowIndex(rowIndex);
+    const img = getImgFromButton(button);
+    replacePictureSprite(img);
+    updateFoilStatus(button, rowIndex);
+};
 
-    for (const match of matches) {
-        const button = Dropdown.all[`details[${match}][card_edition_id]`].button.parent;
-        const img = button.getElementsByTagName("img")[0];
-        replacePictureSprite(img);
-        updateFoilStatus(button, match);
-    }
+const updateDropdown = (rowIndex) => {
+    const mapPicture = (valueSet) => {
+        valueSet[0] = valueSet[0].replace(
+            /(src='.*?')(.*?data-tt='(.*?)')/,
+            "src='https://s.deckbox.org/system/images/mtg/cards/$3.jpg'$2"
+        );
+
+        const url = valueSet[0].match(/src='(.*?)'/)[1];
+        return valueSet;
+    };
+
+    const mappedValues =
+        Dropdown.all[`details[${rowIndex}][card_edition_id]`].values.map(mapPicture);
+    Dropdown.all[`details[${rowIndex}][card_edition_id]`].values = mappedValues;
 };
 
 const inject = (fn, injectedFuncs) => {
@@ -54,13 +61,25 @@ const inject = (fn, injectedFuncs) => {
     };
 };
 
+const preloadImg = (url) => {
+    new Image().src = url;
+};
+
+const getButtonFromRowIndex = (rowIndex) => {
+    return Dropdown.all[`details[${rowIndex}][card_edition_id]`].button;
+};
+
+const getImgFromButton = (button) => {
+    return button.parent.getElementsByTagName("img")[0];
+};
+
 const replacePictureSprite = (img) => {
     img.src = `https://s.deckbox.org/system/images/mtg/cards/${img.dataset.tt}.jpg`;
 };
 
-const setFoil = (button, isFoil = false) => {
-    isFoil ? button.classList.add("foil") : button.classList.remove("foil");
+const setFoil = (buttonContainer, isFoil = false) => {
+    isFoil ? buttonContainer.classList.add("foil") : buttonContainer.classList.remove("foil");
 };
 
-injectAutocompleteFinished();
+injectSelectData();
 injectRowAdded();

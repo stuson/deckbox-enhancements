@@ -1,7 +1,9 @@
-.details_row img.sprite.s_picture {
-    max-width: 106px;
-    min-height: 148px;
+.details_row img.sprite.s_picture,
+._menu_item img.sprite.s_picture {
+    width: 106px;
+    height: 148px;
     margin: 10px;
+    background-image: none;
 }
 
 .esym {
