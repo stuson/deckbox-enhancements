@@ -87,6 +87,8 @@ module.exports = {
 },{}],2:[function(require,module,exports){
 require("./style.css");
 
+console.log("updated!");
+
 const injectAutocompleteFinished = () => {
     Tcg.ui.ImportAddCardAdvanced.prototype._afterUpdate = inject(
         Tcg.ui.ImportAddCardAdvanced.prototype._afterUpdate,
