@@ -47,8 +47,7 @@
 }
 
 .foil::after {
-    background-image: url(https://assets.codepen.io/13471/sparkles.gif),
-        url(https://assets.codepen.io/13471/holo.png),
+    background-image: url(https://i.imgur.com/NVFh3V8.gif),
         linear-gradient(
             125deg,
             #ff008460 15%,
