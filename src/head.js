@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Deckbox Enhancements
 // @namespace    https://github.com/stuson
-// @version      0.1.0
+// @version      0.1.1
 // @description  Various enhancements for Deckbox (deckbox.org)
 // @author       Sam Tuson
 // @match        https://deckbox.org/sets/*
