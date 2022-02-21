@@ -30,6 +30,10 @@ Adds a colourful, animated effect to cards marked as foil. Helps you distinguish
 
 ## Changelog
 
+### v1.0.3
+
+-   Various back-end fixes
+
 ### v1.0.2
 
 -   Fixed card preview not appearing in dropdowns when a card that doesn't exist in user's collection is selected
