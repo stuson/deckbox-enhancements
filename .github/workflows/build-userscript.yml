@@ -20,6 +20,5 @@ jobs:
             - run: |
                   git config --global user.name ${{ secrets.USER_NAME }}
                   git config --global user.email ${{ secrets.USER_EMAIL }}
-                  git add -A
-                  git commit -m "${{ github.event.release.name || github.event.release.tag_name }}" --allow-empty
+                  git commit -am "${{ github.event.release.name || github.event.release.tag_name }}" --allow-empty
                   git push
