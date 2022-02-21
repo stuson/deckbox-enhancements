@@ -157,7 +157,7 @@ const getButtonFromRowIndex = (rowIndex) => {
 };
 
 const getImgFromButton = (button) => {
-    return button.parent.getElementsByTagName("img")[0];
+    return button.parent.getElementsByClassName("sprite s_picture")[0];
 };
 
 const replacePictureSprite = (img) => {
