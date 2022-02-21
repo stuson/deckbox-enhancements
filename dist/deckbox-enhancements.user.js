@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Deckbox Enhancements
 // @namespace    https://github.com/stuson
-// @version      1.0.1
+// @version      1.0.2
 // @description  Various enhancements for Deckbox (deckbox.org)
 // @author       Sam Tuson
 // @match        https://deckbox.org/sets/*
@@ -90,7 +90,10 @@ require("./style.css");
 const injectRowAdded = () => {
     PanelCardInfo.prototype.addRow = inject(PanelCardInfo.prototype.addRow, {
         callback: (rowIndex) => {
-            setTimeout(() => updateFormRow(rowIndex), 10);
+            setTimeout(() => {
+                updateFormRow(rowIndex);
+                updateDropdown(rowIndex);
+            }, 10);
         },
     });
 };
