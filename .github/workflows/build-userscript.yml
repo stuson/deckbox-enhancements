@@ -36,7 +36,7 @@ jobs:
               uses: mathieudutour/github-tag-action@v6.0
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-                  custom_tag: ${{ github.events.head_commit.message }}
+                  custom_tag: ${{ github.event.head_commit.message }}
 
             - name: Create release
               uses: ncipollo/release-action@v1
