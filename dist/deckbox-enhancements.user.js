@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Deckbox Enhancements
 // @namespace    https://github.com/stuson
-// @version      1.0.2
+// @version      1.0.2e
 // @description  Various enhancements for Deckbox (deckbox.org)
 // @author       Sam Tuson
 // @match        https://deckbox.org/sets/*
@@ -126,8 +126,6 @@ const updateDropdown = (rowIndex) => {
             /(src='.*?')(.*?data-tt='(.*?)')/,
             "src='https://s.deckbox.org/system/images/mtg/cards/$3.jpg'$2"
         );
-
-        const url = valueSet[0].match(/src='(.*?)'/)[1];
         return valueSet;
     };
 
