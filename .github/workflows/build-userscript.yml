@@ -20,5 +20,6 @@ jobs:
             - run: |
                   git config --global user.name ${{ secrets.USER_NAME }}
                   git config --global user.email ${{ secrets.USER_EMAIL }}
-                  git diff-index --quiet HEAD || git commit -am "${{ github.event.release.name }}"
+                  git add dist/deckbox-enhancements.user.js
+                  git diff-index --quiet --cached HEAD || git commit -m "${{ github.event.release.name }}"
                   git push
