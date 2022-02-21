@@ -39,8 +39,6 @@ const updateDropdown = (rowIndex) => {
             /(src='.*?')(.*?data-tt='(.*?)')/,
             "src='https://s.deckbox.org/system/images/mtg/cards/$3.jpg'$2"
         );
-
-        const url = valueSet[0].match(/src='(.*?)'/)[1];
         return valueSet;
     };
 
