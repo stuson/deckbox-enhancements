@@ -21,7 +21,7 @@ jobs:
             - run: |
                   git config --global user.name ${{ secrets.USER_NAME }}
                   git config --global user.email ${{ secrets.USER_EMAIL }}
-                  git commit -am "${{ ref_name }}" --allow-empty
+                  git commit -am "${{ github.ref_name }}" --allow-empty
                   git push origin
             - uses: ncipollo/release-action@v1
               with:
