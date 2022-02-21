@@ -61,10 +61,6 @@ const inject = (fn, injectedFuncs) => {
     };
 };
 
-const preloadImg = (url) => {
-    new Image().src = url;
-};
-
 const getButtonFromRowIndex = (rowIndex) => {
     return Dropdown.all[`details[${rowIndex}][card_edition_id]`].button;
 };
