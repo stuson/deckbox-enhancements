@@ -3,7 +3,10 @@ require("./style.css");
 const injectRowAdded = () => {
     PanelCardInfo.prototype.addRow = inject(PanelCardInfo.prototype.addRow, {
         callback: (rowIndex) => {
-            setTimeout(() => updateFormRow(rowIndex), 10);
+            setTimeout(() => {
+                updateFormRow(rowIndex);
+                updateDropdown(rowIndex);
+            }, 10);
         },
     });
 };
