@@ -6,13 +6,13 @@ Various enhancements to your Deckbox (deckbox.org) inventory.
 
 ### Card Image Previews
 
-![Feature: Card Preview](https://raw.githubusercontent.com/stuson/deckbox-enhancements/main/res/feature_cardpreview.png)
+![Feature: Card Preview](https://raw.githubusercontent.com/stuson/deckbox-enhancements/main/res/img/feature_cardpreview.png)
 
 Shows a preview of the card when adding to your inventory. No need to hover over each one.
 
 ### Foil Effect
 
-![Feature: Foil Effect](https://raw.githubusercontent.com/stuson/deckbox-enhancements/main/res/feature_cardpreview.png)
+![Feature: Foil Effect](https://raw.githubusercontent.com/stuson/deckbox-enhancements/main/res/img/feature_foileffect.png)
 
 Adds a colourful, animated effect to cards marked as foil. Helps you distinguish foil and non-foil rows easier, and looks pretty!
 
